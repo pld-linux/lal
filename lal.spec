@@ -1,7 +1,7 @@
 Summary:	LALSuite is comprised of various gravitational wave data analysis routines
 Name:		lal
 Version:	6.15.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Science
 Source0:	https://www.lsc-group.phys.uwm.edu/daswg/download/software/source/lalsuite/%{name}-%{version}.tar.gz
