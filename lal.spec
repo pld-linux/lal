@@ -2,12 +2,12 @@
 Summary:	LALSuite - various gravitational wave data analysis routines
 Summary(pl.UTF-8):	LALSuite - różne procedury do analizy danych fal grawitacyjnych
 Name:		lal
-Version:	6.18.0
-Release:	2
+Version:	6.20.2
+Release:	1
 License:	GPL v2
 Group:		Applications/Science
 Source0:	http://software.ligo.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
-# Source0-md5:	a278f190758c4902055a57efa6d406d4
+# Source0-md5:	621c8c8758b4bd3d2cbd66727394329e
 Patch0:		%{name}-env.patch
 URL:		https://wiki.ligo.org/DASWG/LALSuite
 BuildRequires:	autoconf >= 2.63
