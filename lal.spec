@@ -9,6 +9,7 @@ Group:		Applications/Science
 Source0:	http://software.ligo.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
 # Source0-md5:	621c8c8758b4bd3d2cbd66727394329e
 Patch0:		%{name}-env.patch
+Patch1:		no-simd.patch
 URL:		https://wiki.ligo.org/DASWG/LALSuite
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
@@ -101,6 +102,9 @@ Wiązania Pythona do bibliotek LAL.
 %prep
 %setup -q
 %patch0 -p1
+%ifarch %{ix86}
+%patch1 -p1
+%endif
 
 %build
 %{__libtoolize}
@@ -133,16 +137,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README
+%doc AUTHORS README.md
 %{_sysconfdir}/shrc.d/lal-user-env.csh
 %{_sysconfdir}/shrc.d/lal-user-env.fish
 %{_sysconfdir}/shrc.d/lal-user-env.sh
 %attr(755,root,root) %{_bindir}/lal_simd_detect
 %attr(755,root,root) %{_bindir}/lal_version
 %attr(755,root,root) %{_libdir}/liblal.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblal.so.14
+%attr(755,root,root) %ghost %{_libdir}/liblal.so.17
 %attr(755,root,root) %{_libdir}/liblalsupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblalsupport.so.11
+%attr(755,root,root) %ghost %{_libdir}/liblalsupport.so.12
 
 %files devel
 %defattr(644,root,root,755)

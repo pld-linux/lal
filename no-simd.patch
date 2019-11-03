@@ -1,0 +1,55 @@
+--- lal-6.20.2/gnuscripts/lalsuite_build.m4~	2019-05-20 17:00:05.000000000 +0200
++++ lal-6.20.2/gnuscripts/lalsuite_build.m4	2019-11-03 19:52:57.869133016 +0100
+@@ -1294,51 +1294,7 @@
+     m4_pushdef([symbol],m4_translit(iset,[A-Z.],[A-Z_]))
+ 
+     # assume supported until test fails, in which break out of loop
+-    for iset_supported in yes; do
+-
+-      # check -m[]option flag
+-      LALSUITE_CHECK_COMPILE_FLAGS([-m[]option],[],[iset_supported=no])
+-      AS_IF([test x"${iset_supported}" = xno],[break])
+-
+-      # check that compiler defines __]symbol[__ preprocessor symbol
+-      AC_MSG_CHECKING([whether ]_AC_LANG[ compiler defines __]symbol[__ with -m[]option])
+-      CFLAGS="${uvar_orig_prefix[]CFLAGS} -m[]option"
+-      AC_COMPILE_IFELSE([
+-        AC_LANG_PROGRAM([],[[
+-#if !defined(__]]symbol[[__)
+-#error Preprocessor macro not defined by compiler
+-#endif
+-]])
+-      ],[
+-        AC_MSG_RESULT([yes])
+-      ],[
+-        AC_MSG_RESULT([no])
+-        iset_supported=no
+-      ])
+-      AS_IF([test x"${iset_supported}" = xno],[break])
+-
+-      # check that compiler compiles floating-point math with -m[]option
+-      AC_MSG_CHECKING([whether ]_AC_LANG[ compiler compiles floating-point math with -m[]option])
+-      CFLAGS="${uvar_orig_prefix[]CFLAGS} -m[]option"
+-      AC_COMPILE_IFELSE([
+-        AC_LANG_PROGRAM([
+-AC_INCLUDES_DEFAULT
+-#include <math.h>
+-],[[
+-double volatile a = 1.2;
+-double volatile b = 3.4;
+-double volatile c = a * b;
+-double volatile d = round(c);
+-]])
+-      ],[
+-        AC_MSG_RESULT([yes])
+-      ],[
+-        AC_MSG_RESULT([no])
+-        iset_supported=no
+-      ])
+-      AS_IF([test x"${iset_supported}" = xno],[break])
+-
+-    done
++    iset_supported=no
+ 
+     # define Automake conditional HAVE_<SIMD>_COMPILER
+     AM_CONDITIONAL([HAVE_]symbol[_COMPILER],[test x"${iset_supported}" = xyes])
