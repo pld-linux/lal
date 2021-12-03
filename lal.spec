@@ -2,12 +2,12 @@
 Summary:	LALSuite - various gravitational wave data analysis routines
 Summary(pl.UTF-8):	LALSuite - różne procedury do analizy danych fal grawitacyjnych
 Name:		lal
-Version:	6.20.2
-Release:	2
+Version:	7.1.4
+Release:	1
 License:	GPL v2
 Group:		Applications/Science
 Source0:	http://software.ligo.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
-# Source0-md5:	621c8c8758b4bd3d2cbd66727394329e
+# Source0-md5:	248e9728fe10db12239957b83b6a1316
 Patch0:		%{name}-env.patch
 Patch1:		no-simd.patch
 URL:		https://wiki.ligo.org/DASWG/LALSuite
@@ -21,8 +21,8 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
 BuildRequires:	octave-devel >= 2:3.2.0
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.6
-BuildRequires:	python-numpy-devel >= 1.7
+BuildRequires:	python3-devel
+BuildRequires:	python3-numpy-devel
 # 2.0.12 for octave 3.2, 3.0.7 for octave 4.0, 3.0.12 for octave 4.2
 BuildRequires:	swig >= 3.0.12
 BuildRequires:	swig-python >= 2.0.12
@@ -85,18 +85,18 @@ Octave LAL interface.
 %description -n octave-lal -l pl.UTF-8
 Interfejs Octave do bibliotek LAL.
 
-%package -n python-lal
+%package -n python3-lal
 Summary:	LAL Python bindings
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek LAL
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	python-modules >= 1:2.6
-Requires:	python-numpy >= 1:1.7
+Requires:	python3-modules >= 1:2.6
+Requires:	python3-numpy >= 1:1.7
 
-%description -n python-lal
+%description -n python3-lal
 LAL Python bindings.
 
-%description -n python-lal -l pl.UTF-8
+%description -n python3-lal -l pl.UTF-8
 Wiązania Pythona do bibliotek LAL.
 
 %prep
@@ -144,9 +144,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/lal_simd_detect
 %attr(755,root,root) %{_bindir}/lal_version
 %attr(755,root,root) %{_libdir}/liblal.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblal.so.17
+%attr(755,root,root) %ghost %{_libdir}/liblal.so.20
 %attr(755,root,root) %{_libdir}/liblalsupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/liblalsupport.so.12
+%attr(755,root,root) %ghost %{_libdir}/liblalsupport.so.14
 
 %files devel
 %defattr(644,root,root,755)
@@ -165,12 +165,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/octave/*/site/oct/*/lal.oct
 
-%files -n python-lal
+%files -n python3-lal
 %defattr(644,root,root,755)
-%dir %{py_sitedir}/lal
-%attr(755,root,root) %{py_sitedir}/lal/_lal.so
-%{py_sitedir}/lal/*.py[co]
-%dir %{py_sitedir}/lal/spectrum
-%{py_sitedir}/lal/spectrum/*.py[co]
-%dir %{py_sitedir}/lal/utils
-%{py_sitedir}/lal/utils/*.py[co]
+%dir %{py3_sitedir}/lal
+%attr(755,root,root) %{py3_sitedir}/lal/_lal.so
+%{py3_sitedir}/lal/*.py
+%{py3_sitedir}/lal/__pycache__
+%dir %{py3_sitedir}/lal/utils
+%{py3_sitedir}/lal/utils/*.py
+%{py3_sitedir}/lal/utils/__pycache__
