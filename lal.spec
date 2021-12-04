@@ -3,7 +3,7 @@ Summary:	LALSuite - various gravitational wave data analysis routines
 Summary(pl.UTF-8):	LALSuite - różne procedury do analizy danych fal grawitacyjnych
 Name:		lal
 Version:	7.1.4
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Science
 Source0:	http://software.ligo.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
@@ -123,6 +123,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# Fix undefined variable genereted by configure
+%{__sed} -i -e 's/\${PYTHON_EXEC_PREFIX}/\${prefix}/' \
+	$RPM_BUILD_ROOT%{_pkgconfigdir}/*.pc
 
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/liblal*.la
