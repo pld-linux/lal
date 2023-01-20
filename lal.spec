@@ -2,15 +2,17 @@
 Summary:	LALSuite - various gravitational wave data analysis routines
 Summary(pl.UTF-8):	LALSuite - różne procedury do analizy danych fal grawitacyjnych
 Name:		lal
-Version:	7.1.4
-Release:	4
+Version:	7.2.4
+Release:	1
 License:	GPL v2
 Group:		Applications/Science
-Source0:	http://software.ligo.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
-# Source0-md5:	248e9728fe10db12239957b83b6a1316
+Source0:	http://software.igwn.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
+# Source0-md5:	14994c1e60f71409e3765ece76adb021
 Patch0:		%{name}-env.patch
 Patch1:		no-simd.patch
-URL:		https://wiki.ligo.org/DASWG/LALSuite
+Patch2:		%{name}-swig.patch
+Patch3:		%{name}-octave.patch
+URL:		https://wiki.ligo.org/Computing/DASWG/LALSuite
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	fftw3-devel
@@ -19,12 +21,12 @@ BuildRequires:	gsl-devel >= 1.13
 BuildRequires:	hdf5-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
-BuildRequires:	octave-devel >= 2:3.2.0
+BuildRequires:	octave-devel >= 2:6
 BuildRequires:	pkgconfig
-BuildRequires:	python3-devel
+BuildRequires:	python3-devel >= 1:3.5
 BuildRequires:	python3-numpy-devel
-# 2.0.12 for octave 3.2, 3.0.7 for octave 4.0, 3.0.12 for octave 4.2
-BuildRequires:	swig >= 3.0.12
+# 2.0.12 for octave 3.2, 3.0.7 for octave 4.0, 3.0.12 for octave 4.2, 4.1.0 for octave 6
+BuildRequires:	swig >= 4.1.0
 BuildRequires:	swig-python >= 2.0.12
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texlive-dvips
@@ -105,6 +107,8 @@ Wiązania Pythona do bibliotek LAL.
 %ifarch %{ix86}
 %patch1 -p1
 %endif
+%patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -145,12 +149,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/shrc.d/lal-user-env.csh
 %{_sysconfdir}/shrc.d/lal-user-env.fish
 %{_sysconfdir}/shrc.d/lal-user-env.sh
+%attr(755,root,root) %{_bindir}/lal_cache
+%attr(755,root,root) %{_bindir}/lal_fftw_wisdom
+%attr(755,root,root) %{_bindir}/lal_fftwf_wisdom
+%attr(755,root,root) %{_bindir}/lal_path2cache
+%attr(755,root,root) %{_bindir}/lal_searchsum2cache
 %attr(755,root,root) %{_bindir}/lal_simd_detect
+%attr(755,root,root) %{_bindir}/lal_tconvert
 %attr(755,root,root) %{_bindir}/lal_version
 %attr(755,root,root) %{_libdir}/liblal.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/liblal.so.20
 %attr(755,root,root) %{_libdir}/liblalsupport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/liblalsupport.so.14
+%{_mandir}/man1/lal_cache.1*
+%{_mandir}/man1/lal_fftw_wisdom.1*
+%{_mandir}/man1/lal_fftwf_wisdom.1*
+%{_mandir}/man1/lal_path2cache.1*
+%{_mandir}/man1/lal_searchsum2cache.1*
+%{_mandir}/man1/lal_simd_detect.1*
+%{_mandir}/man1/lal_tconvert.1*
+%{_mandir}/man1/lal_version.1*
 
 %files devel
 %defattr(644,root,root,755)
