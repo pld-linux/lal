@@ -94,6 +94,7 @@ Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python3-modules >= 1:2.6
 Requires:	python3-numpy >= 1:1.7
+Obsoletes:	python-lal < 7
 
 %description -n python3-lal
 LAL Python bindings.
