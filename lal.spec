@@ -12,7 +12,7 @@ Patch0:		%{name}-env.patch
 Patch1:		no-simd.patch
 Patch2:		%{name}-swig.patch
 Patch3:		%{name}-octave.patch
-URL:		https://wiki.ligo.org/Computing/DASWG/LALSuite
+URL:		https://wiki.ligo.org/Computing/LALSuite
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	fftw3-devel
@@ -24,10 +24,10 @@ BuildRequires:	libtool >= 2:2
 BuildRequires:	octave-devel >= 2:6
 BuildRequires:	pkgconfig
 BuildRequires:	python3-devel >= 1:3.5
-BuildRequires:	python3-numpy-devel
-# 2.0.12 for octave 3.2, 3.0.7 for octave 4.0, 3.0.12 for octave 4.2, 4.1.0 for octave 6
+BuildRequires:	python3-numpy-devel >= 1:1.7
+# 3.0.11 for octave 4.0, 3.0.12 for octave 4.2, 4.0.2 for octave 4.4, 4.1.0 for octave 6
 BuildRequires:	swig >= 4.1.0
-BuildRequires:	swig-python >= 2.0.12
+BuildRequires:	swig-python >= 3.0.11
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	texlive-dvips
 BuildRequires:	texlive-format-pdflatex
@@ -92,7 +92,7 @@ Summary:	LAL Python bindings
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek LAL
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	python3-modules >= 1:2.6
+Requires:	python3-modules >= 1:3.5
 Requires:	python3-numpy >= 1:1.7
 Obsoletes:	python-lal < 7
 
