@@ -139,8 +139,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/shrc.d
 %{__mv} $RPM_BUILD_ROOT%{_sysconfdir}/*sh $RPM_BUILD_ROOT/etc/shrc.d
 
-%py_postclean
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
