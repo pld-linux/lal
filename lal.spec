@@ -1,24 +1,26 @@
-# TODO: bconds for boinc, cuda
+# TODO:
+# - bconds for boinc, cuda
+# - apidocs (doxygen >= 1.8.1.2 required, 1.8.11 preferred)
 Summary:	LALSuite - various gravitational wave data analysis routines
 Summary(pl.UTF-8):	LALSuite - różne procedury do analizy danych fal grawitacyjnych
 Name:		lal
-Version:	7.2.4
-Release:	2
+Version:	7.5.0
+Release:	1
 License:	GPL v2
 Group:		Applications/Science
 Source0:	http://software.igwn.org/lscsoft/source/lalsuite/%{name}-%{version}.tar.xz
-# Source0-md5:	14994c1e60f71409e3765ece76adb021
+# Source0-md5:	15a1d845aa0f3bd09890fe069fa51f06
 Patch0:		%{name}-env.patch
 Patch1:		no-simd.patch
-Patch2:		%{name}-swig.patch
 Patch3:		%{name}-octave.patch
 URL:		https://wiki.ligo.org/Computing/LALSuite
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	fftw3-devel
-BuildRequires:	fftw3-single-devel
+BuildRequires:	fftw3-devel >= 3
+BuildRequires:	fftw3-single-devel >= 3
 BuildRequires:	gsl-devel >= 1.13
 BuildRequires:	hdf5-devel
+BuildRequires:	help2man >= 1.37
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
 BuildRequires:	octave-devel >= 2:6
@@ -51,8 +53,8 @@ Summary:	Header files for LAL core libraries
 Summary(pl.UTF-8):	Pliki nagłówkowe podstawowych bibliotek LAL
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	fftw3-devel
-Requires:	fftw3-single-devel
+Requires:	fftw3-devel >= 3
+Requires:	fftw3-single-devel >= 3
 Requires:	gsl-devel >= 1.13
 Requires:	zlib-devel
 
@@ -108,7 +110,6 @@ Wiązania Pythona do bibliotek LAL.
 %ifarch %{ix86}
 %patch1 -p1
 %endif
-%patch2 -p1
 %patch3 -p1
 
 %build
@@ -168,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/lal_simd_detect.1*
 %{_mandir}/man1/lal_tconvert.1*
 %{_mandir}/man1/lal_version.1*
+%{_mandir}/man7/LAL_DEBUG_LEVEL.7*
 
 %files devel
 %defattr(644,root,root,755)
