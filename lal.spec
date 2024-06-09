@@ -119,6 +119,7 @@ Wiązania Pythona do bibliotek LAL.
 %{__autoheader}
 %{__automake}
 %configure \
+	PYTHON=%{__python3} \
 	ac_cv_path_GIT=no-you-dont \
 	--disable-silent-rules \
 	--enable-swig
