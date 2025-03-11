@@ -106,11 +106,11 @@ Wiązania Pythona do bibliotek LAL.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P 0 -p1
 %ifarch %{ix86}
-%patch1 -p1
+%patch -P 1 -p1
 %endif
-%patch3 -p1
+%patch -P 3 -p1
 
 %build
 %{__libtoolize}
